@@ -1,0 +1,21 @@
+name: docker scaner
+on: push
+
+jobs:
+    fuck:
+     name: FUCK
+     runs-on: ubuntu-latest
+     steps:
+       - name: Check code
+         uses: actions/checkout@v4
+
+       - name: Docker build
+         run: docker build -t myapp:latest .
+
+       - name: trivy
+         uses: aquasecurity/trivy-action@v0.4.4
+         with:
+            image-ref: myapp:latest
+            exit-code: 1
+            vuln-type: 'os,libary'
+        
