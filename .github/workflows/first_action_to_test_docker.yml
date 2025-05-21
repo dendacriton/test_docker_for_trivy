@@ -13,7 +13,7 @@ jobs:
          run: docker build -t myapp:latest .
 
        - name: trivy
-         uses: aquasecurity/trivy-action@latest
+         uses: aquasecurity/trivy-action@v0.30.0
          with:
             image-ref: myapp:latest
             exit-code: 1
