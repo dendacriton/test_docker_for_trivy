@@ -16,4 +16,9 @@ jobs:
        - name: get trivy
          run: wget https://github.com/aquasecurity/trivy/releases/download/v0.62.1/trivy_0.62.1_Linux-64bit.deb && sudo dpkg -i trivy_0.62.1_Linux-64bit.deb
        - name: Run Trivy ignoring unfixed vulnerabilities
-         run: trivy image --ignore-unfixed --exit-code 1 --severity HIGH,CRITICAL myapp:latest
+         run: trivy image --ignore-unfixed --exit-code 1 -f json -o trivy_report.json --severity HIGH,CRITICAL myapp:latest
+       - name: save results
+         uses: actions/upload-artifact@v4
+         with:
+          name: trivy-report
+          path: trivy_report.json  
