@@ -11,6 +11,9 @@ jobs:
 
        - name: Docker build
          run: docker build -t myapp:latest .
-        
+       - name: get wget
+         run: sudo apt install -y wget
+       - name: get trivy
+         run: wget https://github.com/aquasecurity/trivy/releases/download/v0.62.1/trivy_0.62.1_Linux-64bit.deb && sudo dpkg -i trivy_0.62.1_Linux-64bit.deb
        - name: Run Trivy ignoring unfixed vulnerabilities
          run: trivy image --ignore-unfixed --exit-code 1 --severity HIGH,CRITICAL myapp:latest
